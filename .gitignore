@@ -1,0 +1,15 @@
+# Ignorar entorno virtual
+.venv/
+venv/
+
+# Ignorar carpetas de trabajo y sandbox
+3-Sandbx/
+2-Workng/
+
+# Ignorar archivos de configuración de entorno
+.env
+
+# Ignorar cachés y archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
