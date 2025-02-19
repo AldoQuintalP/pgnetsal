@@ -10,8 +10,9 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 from datetime import datetime
+from ftplib import FTP
 
-# Cargar variables de entorno desde un archivo .env
+
 load_dotenv()
 
 # Obtener rutas desde variables de entorno
@@ -24,6 +25,11 @@ PASSWORD = "Lynx2021."
 URL = "https://simetrical.net/"
 BOVEDA_URL = "https://simetrical.net/simetrical/boveda/?q=ODM4MQ=="
 
+FTP_HOST = "ftp.simetrical.org"
+FTP_PORT = 21
+FTP_USER = "343"
+FTP_PASS = "3ad7c2"
+
 
 if not WORKNG_PATH or not SANDBX_PATH:
     raise ValueError("Las variables de entorno 'WORKNG_PATH' y 'SANDBX_PATH' deben estar definidas en el archivo .env")
@@ -32,18 +38,32 @@ if not WORKNG_PATH or not SANDBX_PATH:
 
 # Configurar Selenium WebDriver
 options = webdriver.ChromeOptions()
-options.add_argument("--headless")  # Para ejecutar en segundo plano
+options.add_argument("--headless")  
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=options)
 
+
+# Subir archivo al FTP
+def upload_to_ftp(file_path):
+    try:
+        with FTP() as ftp:
+            ftp.connect(FTP_HOST, FTP_PORT)
+            ftp.login(FTP_USER, FTP_PASS)
+            print(f"Conectado a {FTP_HOST}")
+            
+            with open(file_path, "rb") as file:
+                ftp.storbinary(f"STOR {os.path.basename(file_path)}", file)
+                print(f"Archivo {file_path} subido exitosamente al FTP.")
+    except Exception as e:
+        print(f"Error al subir archivo al FTP: {e}")
+
 def login_to_site():
     driver.get(URL)
     time.sleep(2)
     
-    # Mostrar ventana del navegador
     driver.maximize_window()
     
     # Buscar y completar el campo de usuario
@@ -80,7 +100,7 @@ def navigate_to_boveda():
     print("Navegación a la bóveda completada")
 
 def download_zip():
-    today = datetime.today().strftime('%d')  # Obtener el día actual
+    today = datetime.today().strftime('%d') 
     zip_filename = f"838101{today}.zip"
     zip_path = os.path.join(DOWNLOADS_PATH, zip_filename)
     
@@ -89,7 +109,7 @@ def download_zip():
         zip_link.click()
         print(f"Descargando {zip_filename}")
         
-        time.sleep(10)  # Esperar la descarga
+        time.sleep(10) 
         
         if os.path.exists(zip_path):
             shutil.move(zip_path, WORKNG_PATH)
@@ -103,7 +123,7 @@ login_to_site()
 navigate_to_boveda()
 download_zip()
 
-time.sleep(5)  # Mantener la ventana abierta por un tiempo para ver el estado
+time.sleep(5) 
 
 print("Proceso completado")
 
@@ -199,7 +219,8 @@ def process_all_sheets_with_mes(excel_file, sheet_names, columns):
     return output_df
 
 sheet_names = pd.ExcelFile(FILE_PATH).sheet_names 
-output_csv_path = os.path.join(SANDBX_PATH, 'pgnetsal.csv')
+today = datetime.today().strftime('%d')
+output_csv_path = os.path.join(SANDBX_PATH, f'pgnetsal{today}.csv')
 
 headers = extract_and_process_headers(FILE_PATH, sheet_names)
 columns = ["Dealer_Net_Sales"] + headers + ["Mes_"]
@@ -213,5 +234,8 @@ for file in os.listdir(WORKNG_PATH):
     file_path = os.path.join(WORKNG_PATH, file)
     if os.path.isfile(file_path) or os.path.isdir(file_path):
         os.remove(file_path) if os.path.isfile(file_path) else shutil.rmtree(file_path)
+
+upload_to_ftp(os.path.join(SANDBX_PATH, f'pgnetsal{today}.csv'))
+
 
 print(f"Archivo procesado en {output_csv_path}")
