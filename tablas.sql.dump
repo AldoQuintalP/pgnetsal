@@ -1,0 +1,60 @@
+-- MySQL dump 10.13  Distrib 5.7.41, for Linux (x86_64)
+--
+-- Host: localhost    Database: sim_312
+-- ------------------------------------------------------
+-- Server version	5.7.41
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `tablas`
+--
+
+DROP TABLE IF EXISTS `tablas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tablas` (
+  `Name` varchar(6) DEFAULT NULL,
+  `Tipo` char(1) DEFAULT NULL,
+  `Planta` char(1) DEFAULT NULL,
+  `CampoLlave` varchar(20) DEFAULT NULL,
+  `CampoFecha` varchar(20) DEFAULT NULL,
+  `Descripcion` varchar(30) DEFAULT NULL,
+  `Dept` smallint(6) DEFAULT NULL,
+  `IndTypeDefault` char(4) DEFAULT NULL,
+  `CampoTotal1` varchar(20) DEFAULT NULL,
+  `CampoTotal2` varchar(20) DEFAULT NULL,
+  `OKReporteVacio` char(1) DEFAULT NULL,
+  `KeyReport` char(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tablas`
+--
+
+LOCK TABLES `tablas` WRITE;
+/*!40000 ALTER TABLE `tablas` DISABLE KEYS */;
+INSERT INTO `tablas` VALUES ('BALANZ','B',NULL,NULL,NULL,'Balanza',6,NULL,NULL,NULL,NULL,NULL),('CARCLI','B',NULL,NULL,NULL,'Cartera Total por Cliente',6,NULL,NULL,NULL,NULL,NULL),('CARTER','B',NULL,NULL,NULL,'Cartera',6,NULL,NULL,NULL,NULL,NULL),('CITAS','R',NULL,'NumeroCita','FechaProgramada','Citas de Servicio',3,NULL,NULL,NULL,NULL,NULL),('CLEARM','R',NULL,'NumeroOT','Fecha1erMensaje','Clear Mechanic',3,NULL,NULL,NULL,NULL,NULL),('CONTAP','B','1',NULL,NULL,'Estado Financiero de Planta',1,NULL,NULL,NULL,NULL,NULL),('COTNUE','R',NULL,'NumeroCotizacion','FechaCotizacion','Cotizacion Vtas Autos Nuevos',1,NULL,NULL,NULL,NULL,NULL),('COTNUP','R','1','NumeroCotizacion','FechaCotizacion','Cotizacion de Nuevos Planta',1,NULL,NULL,NULL,NULL,NULL),('COTUSA','R',NULL,'NumeroCotizacion','FechaCotizacion','Cotizacion Vtas Autos Usados',2,NULL,NULL,NULL,NULL,NULL),('CVPENC','B','1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('DATPER','S',NULL,'Factura','FechaFactura','Datos Personales de Servicio',3,NULL,NULL,NULL,NULL,NULL),('FIRSVP','B','1',NULL,NULL,'Primer Servicio (Planta)',3,NULL,'RetDist_','VIN',NULL,NULL),('INTCAM','R',NULL,'Factura','FechaFactura','Intercambios',1,NULL,NULL,NULL,NULL,NULL),('INVDEM','B',NULL,NULL,NULL,'Inventario de DEMOS',1,NULL,'Costo$','VIN',NULL,NULL),('INVNUE','B',NULL,NULL,NULL,'Inventario de Nuevos',1,NULL,'Costo$','VIN',NULL,'2'),('INVUSA','B',NULL,NULL,NULL,'Inventario de Seminuevos',2,NULL,'Costo$','VIN',NULL,'1'),('NOMINA','B',NULL,NULL,NULL,'Nomina',6,NULL,NULL,NULL,NULL,NULL),('PEDDP','B','1',NULL,NULL,'Pedidos de Vta (Planta)',1,NULL,NULL,NULL,NULL,NULL),('PEDIDO','B',NULL,NULL,NULL,'Pedidos de Vta Vigentes Nvo-Us',1,NULL,NULL,NULL,NULL,NULL),('PEDNUE','R',NULL,'NumeroPedido','FechaPedido','Pedido de Ventas Autos Nuevos',1,NULL,NULL,NULL,NULL,NULL),('PEDNUP','R','1','NumeroPedido','FechaPedido','Pedidos de Nuevos (Planta)',1,NULL,NULL,NULL,NULL,NULL),('PEDUSA','R',NULL,'NumeroPedido','FechaPedido','Pedido de Ventas Autos Usados',2,NULL,NULL,NULL,NULL,NULL),('PROSPE','R',NULL,'IdProspecto','FechaPrimerContacto','Prospectos del CRM',1,NULL,NULL,NULL,NULL,NULL),('PROVED','B',NULL,NULL,NULL,'Proveedores',6,NULL,NULL,NULL,NULL,NULL),('REFCOM','R',NULL,'Factura','FechaFactura','Compra de Refacciones',5,NULL,'Costo$','NumeroParte',NULL,NULL),('REFCOP','R','1','Factura','FechaFactura','Compra de Refacciones',5,NULL,'Costo$','NumeroParte',NULL,NULL),('REFDET','R',NULL,'NumeroOT','FechaFactura','Detalle de Refacciones',5,NULL,'Costo$','NumeroParte',NULL,NULL),('REFINP','B','1',NULL,NULL,'Inv. de Refacciones (Planta)',5,NULL,'Costo$','NumeroParte',NULL,NULL),('REFINV','B',NULL,NULL,NULL,'Inv. de Refacciones',5,NULL,'Costo$','NumeroParte',NULL,'1'),('REFMOS','R',NULL,'Factura','FechaFactura','Refacciones en Mostrador',5,NULL,'Costo$','NumeroParte',NULL,'2'),('REFOEP','B',NULL,NULL,NULL,'Refacciones en Proceso',5,NULL,'Costo$','NumeroParte',NULL,NULL),('REFPED','R',NULL,'NumeroPedido','FechaPedido','Pedido de Taller a Almacen',5,NULL,NULL,NULL,NULL,NULL),('REFPOT','B','1',NULL,NULL,'Inventario Rapido Insuficiente',5,NULL,'Costo$','NumeroParte',NULL,NULL),('REFSER','R',NULL,'NumeroOT','FechaFactura','Refacciones en Servicio',5,NULL,'Costo$','NumeroParte',NULL,'2'),('REFVTA','R',NULL,'Factura','FechaFactura','Venta de Refacciones',5,NULL,'Costo$','NumeroParte',NULL,'2'),('REFVTP','R','1','Factura','FechaFactura','Venta de Refacciones (Planta)',5,NULL,'Venta$','Factura',NULL,NULL),('RETCSA','B','1',NULL,NULL,'Retencion por CSA',3,NULL,'VentaTotal12M$','VIN',NULL,NULL),('RETENC','B','1',NULL,NULL,'Retencion (VINes Act/Pas)',3,NULL,'VentaTotal12M$','VIN',NULL,NULL),('RETFST','B','1',NULL,NULL,'Retencion Planta',3,NULL,NULL,NULL,NULL,NULL),('RETOPR','B',NULL,NULL,NULL,'Retencion Operativa',3,NULL,NULL,NULL,NULL,NULL),('SEGUMI','R',NULL,'IdSeguimiento','FechaRegistro','Seguimiento del CRM',1,NULL,NULL,NULL,NULL,NULL),('SERCTE','B',NULL,NULL,NULL,'Clientes de Servicio',3,NULL,NULL,NULL,NULL,NULL),('SEREMP','B',NULL,NULL,NULL,'Empleados de Servicio',3,NULL,NULL,NULL,NULL,NULL),('SEROEP','B',NULL,NULL,NULL,'Ordenes en Proceso',3,NULL,NULL,NULL,NULL,'1'),('SERTEC','R',NULL,'NumeroOT','FechaCierre','Pago de Mecanicos',3,NULL,'HorasPagadas','NumeroOT',NULL,NULL),('SERVT1','R',NULL,'NumeroOT','FechaFactura','Venta de Servicio Complemento',3,NULL,NULL,NULL,NULL,NULL),('SERVTA','R',NULL,'NumeroOT','FechaFactura','Venta de Servicio',3,NULL,'VentaTotal$','VIN',NULL,'2'),('SERVTC','R',NULL,'NumeroOT','FechaFactura','Venta de Servicio Consolidado',3,NULL,'VentaTotal$','VIN',NULL,NULL),('SERVTO','S',NULL,'NumeroOT','FechaFactura','Vehiculos Atendidos Totales',3,NULL,NULL,NULL,NULL,NULL),('SERVTP','R','1','NumeroOT','FechaFactura','Venta de Servicio (Planta)',3,NULL,'VentaTotal$','VIN',NULL,NULL),('SERVTU','S',NULL,'NumeroOT','FechaFactura','Vehiculos Atendidos Publico',3,NULL,NULL,NULL,NULL,NULL),('SICPRO','B',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('SICSEG','R',NULL,'IdSeguimiento','FechaRegistro',NULL,NULL,NULL,NULL,NULL,NULL,NULL),('SICVTA','R',NULL,'IdProspecto','FechaFactura',NULL,NULL,NULL,NULL,NULL,NULL,NULL),('SROEPP','B','1',NULL,NULL,'Ordenes en Proceso Planta',3,NULL,NULL,NULL,NULL,'1'),('SRVTAP','R','1','NumeroOT','FechaFactura','Venta Servicio Detall (Panta)',3,NULL,'VentaTotal$','VIN',NULL,NULL),('SSICOP','B',NULL,NULL,NULL,'Sicop Kpis Calculados',1,NULL,NULL,NULL,NULL,NULL),('TECCON','S',NULL,'NumeroTecnico','FechaCierre','Horas Tecnicos Consolidado',3,NULL,'HorasProductivas','HorasPresenciales',NULL,NULL),('TECNIC','S',NULL,'NumeroTecnico','FechaEntrada','Horas Tecnicos Improductivas',3,NULL,'Horas',NULL,NULL,NULL),('UIO','B','1',NULL,NULL,'UIO',3,NULL,NULL,NULL,NULL,NULL),('VENTAS','R',NULL,'Factura','FechaFactura','Ventas Registradas en CRM',1,NULL,NULL,NULL,NULL,NULL),('VINERR','B','1',NULL,NULL,'VINes Erroneos del Ano',3,NULL,NULL,NULL,NULL,NULL),('VOR','B','1',NULL,NULL,'Ordenes en Proceso (Planta)',3,NULL,NULL,NULL,NULL,NULL),('VTACON','B',NULL,NULL,NULL,'Venta Consolidada Ult 2 meses',1,NULL,NULL,NULL,NULL,NULL),('VTANCA','R',NULL,'Factura','FechaFactura','Ventas Nuevos Canceladas',1,NULL,'Venta$','VIN',NULL,NULL),('VTANUE','R',NULL,'Factura','FechaFactura','Ventas Nuevos',1,NULL,'Venta$','VIN',NULL,'2'),('VTANUP','R','1','Factura','FechaOficial','Venta Nuevos (Planta)',1,NULL,'Venta$','VIN',NULL,NULL),('VTAPER','R',NULL,'FolioVP','FechaVP',NULL,5,NULL,'Ventas$',NULL,NULL,NULL),('VTAUCA','R',NULL,'Factura','FechaFactura','Ventas Usados Canceladas',2,NULL,'Venta$','VIN',NULL,NULL),('VTAUSA','R',NULL,'Factura','FechaFactura','Ventas Usados',2,NULL,'Venta$','VIN',NULL,'1');
+/*!40000 ALTER TABLE `tablas` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-03-19  1:14:27
